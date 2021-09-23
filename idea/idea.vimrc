@@ -2,8 +2,10 @@
 " <ESC> - escape, <BS> - backspace, <CR> - return
 
 " leader
-let mapleader = " "
-
+let mapleader = ","
+set easymotion
+set NERDTree
+set highlightedyank
 " 启用vim surround功能
 set surround
 " 启用multi cursor
@@ -23,7 +25,10 @@ set clipboard=unnamed
 set clipboard+=ideaput
 " 搜索时智能匹配大小写
 set ignorecase smartcase
-
+" 复制后高亮的实效时间
+let g:highlightedyank_highlight_duration = "1000"
+" 复制后高亮的颜色
+let g:highlightedyank_highlight_color = "rgba(160, 160, 160, 155)"
 " Insert
 inoremap jk <Esc>
 " Normal
@@ -34,8 +39,8 @@ vnoremap d dzz
 " Normal + Visual
 noremap # #zz
 noremap * *zz
-noremap w wzz
-noremap W Wzz
+" noremap w wzz
+" noremap W Wzz
 noremap e ezz
 noremap E Ezz
 noremap b bzz
@@ -60,6 +65,10 @@ noremap <C-O> <ESC>:action Back<CR>
 noremap <C-I> <ESC>:action Forward<CR>
 noremap <C-D> <C-D>zz
 noremap <C-U> <C-U>zz
+noremap <C-H> <C-W><C-H>zz
+noremap <C-L> <C-W><C-L>zz
+noremap <C-K> <C-W><C-K>zz
+noremap <C-J> <C-W><C-J>zz
 " E和R是为了保持与Chrome中的SurfingKeys的键位一致
 noremap E gT
 noremap R gt
@@ -78,7 +87,7 @@ noremap <leader>e <ESC>:action ShowErrorDescription<CR>
 " return
 noremap <leader>r <ESC>:action Rerun<CR>
 " Windows或者MacOS的快捷键都与t相关, 所以选择t作为键
-noremap <leader>t <ESC>:action Refactorings.QuickListPopupAction<CR>
+" noremap <leader>t <ESC>:action Refactorings.QuickListPopupAction<CR>
 " y
 "noremap <leader>y <ESC>:action <CR>
 " usage
@@ -93,11 +102,11 @@ noremap <leader>p <ESC>:action ManageRecentProjects<CR>
 " ace jump
 noremap <leader>a <ESC>:action emacsIDEAs.AceJumpWord<CR>
 " structure
-noremap <leader>s <ESC>:action FileStructurePopup<CR>
+noremap <leader>sp <ESC>:action FileStructurePopup<CR>
 " debug option
-noremap <leader>d <ESC>:action ChooseDebugConfiguration<CR>
+noremap <leader>cd <ESC>:action ChooseDebugConfiguration<CR>
 " 同样也是debug，因为d已经被ChooseDebugConfiguration占领, 所以就放在了d键隔壁.
-noremap <leader>f <ESC>:action DebugClass<CR>
+noremap <leader>d <ESC>:action DebugClass<CR>
 " g
 noremap <leader>g <ESC>:action Generate<CR>
 " hide all
@@ -186,6 +195,9 @@ noremap gn <ESC>:action GotoClass<CR>
 " goto method
 noremap gm <ESC>:action GotoSymbol<CR>
 
+" git操作
+
+
 " \ also works
 "noremap \q <ESC>:action <CR>
 " refresh
@@ -209,6 +221,30 @@ noremap ' <ESC>:action Replace<CR>
 noremap [[ <ESC>:action MethodUp<CR>
 " next method
 noremap ]] <ESC>:action MethodDown<CR>
+" 代码折叠自定义快捷键
+nnoremap zC :action CollapseRegionRecursively<CR>
+nnoremap zO :action ExpandRegionRecursively<CR>
+
+
+"""  from k-vim ""
+" 切换前后buffer
+nnoremap [b :bprevious<cr>
+nnoremap ]b :bnext<cr>
+" 使用方向键切换buffer
+noremap <left> :bp<CR>
+noremap <right> :bn<CR>
+map <leader>tn :tabnext<cr>
+map <leader>tp :tabprev<cr>
+" remap U to <C-r> for easier redo
+nnoremap U <C-r>
+" select all
+map <Leader>sa ggVG
+
+" 选中并高亮最后一次插入的内
+nnoremap gv `[v`]
+
+" select block
+nnoremap <leader>v V`}
 
 " multiple cursors
 map <A-M>  <A-N>
